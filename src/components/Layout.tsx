@@ -187,6 +187,13 @@ function Footer() {
           </ul>
         </div>
       </div>
+
+      {/* en altta dev "SELF'S QR" silüeti: sayfanın kapanış imzası, alt kenarı kesik */}
+      <div className="ft-mark" aria-hidden="true">
+        <span>
+          SELF'S <em>QR</em>
+        </span>
+      </div>
     </footer>
   );
 }

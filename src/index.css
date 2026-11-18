@@ -428,6 +428,14 @@
   .cue-dot { animation: cue 2s var(--ease-film) infinite; }
   @keyframes cue { from { transform: translateY(-100%); } to { transform: translateY(200%); } }
 
+  /* alt bilginin en altındaki dev silüet yazı: tepeden aşağı sönen dolgu, alt kenarı kesik */
+  .ft-mark { position: relative; overflow: hidden; height: clamp(4.6rem, 14.5vw, 15rem); margin-top: clamp(1rem, 3vw, 2.5rem); pointer-events: none; user-select: none; }
+  .ft-mark span { position: absolute; left: 50%; top: 0; translate: -50% 0; white-space: nowrap; font-size: clamp(3.4rem, 18.6vw, 19.5rem); line-height: 0.82; font-weight: 700; font-stretch: 125%; letter-spacing: -0.065em; background: linear-gradient(180deg, color-mix(in srgb, var(--fg) 16%, transparent) 0%, color-mix(in srgb, var(--fg) 7%, transparent) 55%, transparent 92%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .ft-mark em { font-style: normal; background: linear-gradient(180deg, rgb(159 176 240 / 0.38) 0%, rgb(100 116 200 / 0.14) 55%, transparent 92%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  /* yalnızca fare / yalnızca dokunmatik için metin */
+  .only-coarse { display: none; }
+  @media (pointer: coarse) { .only-coarse { display: inline; } .only-fine { display: none; } }
+
   /* alt bilgi iletişim kutuları */
   .ft-cell { display: flex; height: 100%; flex-direction: column; justify-content: space-between; gap: 1.75rem; padding: 1.25rem 1.5rem; transition: background 0.4s; }
   .ft-cell:hover { background: color-mix(in srgb, var(--fg) 5%, transparent); }

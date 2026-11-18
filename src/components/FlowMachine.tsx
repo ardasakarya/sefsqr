@@ -137,8 +137,13 @@ function initScene(root: HTMLElement, fontFamily: string, options: Opts): () => 
     controls.enableDamping = true;
     controls.dampingFactor = 0.065;
     controls.enablePan = false;
-    controls.enableZoom = false; // teker ve parmak sayfayı kaydırır, sahneyi değil
-    if (matchMedia("(pointer: coarse)").matches) controls.enableRotate = false;
+    controls.enableZoom = false; // teker sayfayı kaydırır, sahneyi değil
+    // dokunmatik: tek parmak sayfayı kaydırır (makine tepki vermez), iki parmak makineyi çevirir.
+    // OrbitControls tuvale "touch-action: none" koyar — tek parmak kaydırma için "pan-y"ye çekilir.
+    if (matchMedia("(pointer: coarse)").matches) {
+      controls.touches = { ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_ROTATE }; // pan kapalı → tek parmak boşta
+      renderer.domElement.style.touchAction = "pan-y";
+    }
     controls.minPolarAngle = 0.09;
     controls.maxPolarAngle = Math.PI * 0.46;
     controls.rotateSpeed = 0.48;

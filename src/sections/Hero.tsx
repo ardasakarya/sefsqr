@@ -192,7 +192,10 @@ function FlowPanel({
               — {st.desc}
             </>
           ) : (
-            <>Bütün masalar tek döngüde: karekod, sipariş, mutfak, masa, kasa. Sürükleyip çevirin, bir istasyona dokunun.</>
+            <>
+              Bütün masalar tek döngüde: karekod, sipariş, mutfak, masa, kasa. <span className="only-fine">Sürükleyip çevirin, bir istasyona dokunun.</span>
+              <span className="only-coarse">İki parmakla çevirin, bir istasyona dokunun.</span>
+            </>
           )}
         </p>
       </div>
