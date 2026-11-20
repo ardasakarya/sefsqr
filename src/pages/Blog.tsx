@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { categories, posts } from "../data/blog";
+import { categories, postsIndex as posts } from "../data/blog-index";
 import { gsap, reducedMotion, ScrollTrigger } from "../lib/gsap";
 import PageHero from "../components/PageHero";
 import { Icon } from "../components/ui";
