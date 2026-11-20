@@ -4,7 +4,7 @@ import { DEMO, EMAIL, finalCta, footer, nav, PHONE, WA } from "../data/site";
 import { useScrollTheme } from "../lib/theme";
 import { RiseText } from "./motion";
 import { ScrollTrigger } from "../lib/gsap";
-import { lenis, scrollToHash, scrollTop, startSmooth } from "../lib/smooth";
+import { hashTarget, lenis, scrollToHash, scrollTop, startSmooth } from "../lib/smooth";
 import Intro from "./Intro";
 import { Icon, Logo, SmartLink } from "./ui";
 
@@ -203,10 +203,17 @@ function RouteScroll() {
   const { pathname, hash } = useLocation();
   useLayoutEffect(() => {
     if (!hash) scrollTop();
-    const t = setTimeout(() => {
-      ScrollTrigger.refresh();
-      if (hash) scrollToHash(hash, true);
-    }, 120);
+    // Sayfa sonradan yüklenen bir parçaysa (blog, yazı…) hedef başlık henüz DOM'da olmayabilir: en çok ~4 sn bekle
+    const until = performance.now() + 4000;
+    let t = 0;
+    const settle = () => {
+      t = window.setTimeout(() => {
+        if (hash && !hashTarget(hash) && performance.now() < until) return settle();
+        ScrollTrigger.refresh();
+        if (hash) scrollToHash(hash, true);
+      }, 120);
+    };
+    settle();
     return () => clearTimeout(t);
   }, [pathname, hash]);
   return null;
